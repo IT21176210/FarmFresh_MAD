@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FinancilOverviewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="0dp"
+        android:background="#3EA055">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/backBtnOfViewProfile"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_baseline_menu_24"
+                app:tint="@color/white">
+
+            </ImageButton>
+
+            <TextView
+                android:id="@+id/appText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/backBtnOfViewProfile"
+                android:text="Financial Overview"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"
+        android:text="Financial Overview"
+        android:textColor="#3EA055"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+
+
+
+    <ir.mahozad.android.PieChart
+        android:id="@+id/pieChart"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:enabled="true"
+        android:hint="Source"
+        android:inputType="textCapWords"
+        android:textAlignment="center"
+        />
+
+    <TextView
+        android:id="@+id/incomeValue"
+        android:layout_height="100dp"
+        android:layout_below="@+id/pieChart"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:text="Income"
+        android:textColor="#0000ff"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/expenseValue"
+        android:layout_height="100dp"
+        android:layout_below="@+id/incomeValue"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:text="Income"
+        android:textColor="#ff0000"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar1"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="0dp"
+        android:background="#3EA055"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/homeBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_baseline_home_24"
+                app:tint="@color/white">
+
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/profileBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_baseline_person_24"
+                app:tint="@color/white">
+
+            </ImageButton>
+
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+</RelativeLayout>

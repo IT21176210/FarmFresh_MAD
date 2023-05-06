@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FarmFresh</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="facebook_app_id">890824735342404</string>
+    <string name="fb_login_protocol_scheme">fb890824735342404</string>
+    <string name="facebook_client_token">7706c7eae4692dfc0b23db68037b4cc8</string>
+</resources>
