@@ -5,7 +5,7 @@
 
 ### Group Leader  IT21187582  Shanoojan.K
 ### Member 2      IT21176142  Abiramy.K
-### Member 3       IT21176210  Thiraviyarasa.A
+### Member 3       IT21176210  Thiraviyarasa.Aswin
 ### Member 4      IT21189012  Venujan.Y
 
 # Tools & Technology
