@@ -8,8 +8,8 @@
 ### Member 3      IT21187582  Shanoojan.K
 ### Member 4      IT21189012  Venujan.Y
 
-### Tools & Technology
-## kotlin
-## java
-## Android Studio
-## FireBase 
+# Tools & Technology
+### kotlin
+### Android Studio
+### FireBase 
+
