@@ -39,6 +39,8 @@ class AddInventoryActivity : AppCompatActivity() {
         }
 
     }
+    
+
     fun submitInventoryData(){
         val title: EditText = findViewById(R.id.itemName)
         val data: EditText = findViewById(R.id.Date)
