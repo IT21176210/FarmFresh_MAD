@@ -1,11 +1,13 @@
 package com.example.farmfresh
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.farmfresh.Manager.AuthenticationManager
@@ -17,6 +19,15 @@ class ReportsActivity : AppCompatActivity() {
     lateinit var recycleView: RecyclerView
     lateinit var adapter: ReportRecycleActivity
 
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            var isReload = result.data?.getBooleanExtra("reloadState",false)
+            if (isReload == true){
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reports)
@@ -27,9 +38,8 @@ class ReportsActivity : AppCompatActivity() {
 
         val addReportutton: Button = findViewById(R.id.addReport)
         addReportutton.setOnClickListener {
-            var activity = AddReportsActivity()
-            val a = Intent(this, activity::class.java)
-            startActivity(a)
+            val intent = Intent(this, AddReportsActivity::class.java)
+            resultLauncher.launch(intent)
         }
 
         configView()

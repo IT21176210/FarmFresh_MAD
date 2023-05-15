@@ -54,7 +54,7 @@ class AddInventoryActivity : AppCompatActivity() {
         val amountString: String = amount.text.toString()
 
         if (isValidText(titleString)){
-            if (isValidText(dataString) && isNumeric(dataString)) {
+            if (isValidText(dataString) ) {
                 if (isValidText(unitPriceString) &&  isNumeric(unitPriceString)) {
                     if (isValidText(quantityString) && isNumeric(quantityString)) {
                         if (isValidText(amountString) && isNumeric(amountString)){

@@ -38,7 +38,7 @@ class AddReportsActivity : AppCompatActivity() {
         val discriptionString: String = description.text.toString()
 
         if (isValidText(discriptionString)){
-            if (isValidText(dateString) && isNumeric(dateString)) {
+            if (isValidText(dateString)) {
                 if (isValidText(incomeString) && isNumeric(incomeString)) {
                     if (isValidText(expensString) && isNumeric(expensString)) {
                             val reportDate = ReportData("",incomeString,expensString,discriptionString,dateString)

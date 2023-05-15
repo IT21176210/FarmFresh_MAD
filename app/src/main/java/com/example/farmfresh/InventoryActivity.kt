@@ -8,16 +8,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.farmfresh.Manager.AuthenticationManager
 import com.example.farmfresh.Manager.DataManager
 import com.example.farmfresh.Manager.FIRDatabaseManager
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 
 class InventoryActivity : AppCompatActivity() {
 
     lateinit var recycleView: RecyclerView
     lateinit var adapter: InventoryRecycleView
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            var isReload = result.data?.getBooleanExtra("reloadState",false)
+            if (isReload == true){
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +40,8 @@ class InventoryActivity : AppCompatActivity() {
 
         val addIncomeButton: Button = findViewById(R.id.addIncome)
         addIncomeButton.setOnClickListener {
-            var activity = AddInventoryActivity()
-            val a = Intent(this, activity::class.java)
-            startActivity(a)
+            val intent = Intent(this, AddInventoryActivity::class.java)
+            resultLauncher.launch(intent)
         }
 
         configView()
@@ -62,14 +71,5 @@ class InventoryActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            var isReload = data?.getBooleanExtra("reloadState",false)
-            if (isReload == true){
-                adapter.notifyDataSetChanged()
-            }
-        }
-    }
 
 }

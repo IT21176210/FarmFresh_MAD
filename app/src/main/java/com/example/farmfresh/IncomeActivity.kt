@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,15 @@ class IncomeActivity : AppCompatActivity() {
     lateinit var recycleView: RecyclerView
     lateinit var adapter: InComeRecycleView
 
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            var isReload = result.data?.getBooleanExtra("reloadState",false)
+            if (isReload == true){
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.income_activity)
@@ -30,9 +40,8 @@ class IncomeActivity : AppCompatActivity() {
 
         val addIncomeButton: Button = findViewById(R.id.addIncome)
         addIncomeButton.setOnClickListener {
-            var activity = AddIncomeActivity()
-            val a = Intent(this, activity::class.java)
-            startActivity(a)
+            val intent = Intent(this, AddIncomeActivity::class.java)
+            resultLauncher.launch(intent)
         }
 
         configView()
@@ -51,27 +60,16 @@ class IncomeActivity : AppCompatActivity() {
     }
 
     fun configData(){
-         val userId = AuthenticationManager.instance.getUserId()
-       if (userId != null) {
-           val pd = ProgressDialog(this)
-           pd.setMessage("loading");
-           pd.show()
-           FIRDatabaseManager.instance.getIncomeData(userId){
-               adapter.notifyDataSetChanged()
-               pd.dismiss()
-           }
-       }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            var isReload = data?.getBooleanExtra("reloadState",false)
-            if (isReload == true){
+        val userId = AuthenticationManager.instance.getUserId()
+        if (userId != null) {
+            val pd = ProgressDialog(this)
+            pd.setMessage("loading");
+            pd.show()
+            FIRDatabaseManager.instance.getIncomeData(userId){
                 adapter.notifyDataSetChanged()
+                pd.dismiss()
             }
         }
-
     }
 
 

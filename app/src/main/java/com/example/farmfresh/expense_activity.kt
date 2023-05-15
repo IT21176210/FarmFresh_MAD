@@ -12,11 +12,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.farmfresh.Manager.AuthenticationManager
 import com.example.farmfresh.Manager.DataManager
 import com.example.farmfresh.Manager.FIRDatabaseManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 
 class expense_activity : AppCompatActivity() {
 
     lateinit var recycleView: RecyclerView
     lateinit var adapter: ExpenseRecycleView
+
+    var resultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            var isReload = result.data?.getBooleanExtra("reloadState",false)
+            if (isReload == true){
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +39,8 @@ class expense_activity : AppCompatActivity() {
 
         val addIncomeButton: Button = findViewById(R.id.addIncome)
         addIncomeButton.setOnClickListener {
-            var activity = AddExpenseActivity()
-            val a = Intent(this, activity::class.java)
-            startActivity(a)
+            val intent = Intent(this, AddExpenseActivity::class.java)
+            resultLauncher.launch(intent)
         }
 
         configView()
@@ -55,16 +65,6 @@ class expense_activity : AppCompatActivity() {
             FIRDatabaseManager.instance.getExpenseData(userId){
                 adapter.notifyDataSetChanged()
                 pd.dismiss()
-            }
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            var isReload = data?.getBooleanExtra("reloadState",false)
-            if (isReload == true){
-                adapter.notifyDataSetChanged()
             }
         }
     }
